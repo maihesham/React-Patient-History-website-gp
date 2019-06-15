@@ -10,7 +10,8 @@ import PharmcyProfile from './Users/pharmacy';
 import {BrowserRouter as Router , Switch ,Redirect, Route} from 'react-router-dom'
 class App extends Component {
   state={
-    type:"Lab"
+    type:'admin',
+    username:'mai'
   }
   render(){
    
@@ -20,15 +21,15 @@ class App extends Component {
                 <MainNav /> 
                 <Switch>
                       <Route path='/' exact component={HomePage} />
-                      {this.state.type==="admin"&& <Redirect from='/login' exact to='/adminrofile' /> }
-                      {this.state.type==="pharmacy"&& <Redirect from='/login' exact to='/pahrmacyprofile' /> }
-                      {this.state.type==="Lab"&& <Redirect from='/login' exact to='/labprofile' /> }
-                      {this.state.type==="hospital"&& <Redirect from='/login' exact to='/hospitalprofile' /> }
-                      {!this.state.type&&  <Route path='/login' exact component={Login} />}
-                      {this.state.type==="admin"&& <Route path='/adminrofile' exact component={AdminProfile} />}
-                      {this.state.type==="Lab"&&<Route path='/labprofile' exact component={LabProfile} />}
-                      {this.state.type==="hospital"&& <Route path='/hospitalprofile' exact component={HospitalProfile} />}
-                      {this.state.type==="pharmacy"&&  <Route path='/pahrmacyprofile' exact component={PharmcyProfile} />}
+                      {this.state.username&&this.state.type==="admin"&& <Redirect from='/login' exact to='/adminrofile' /> }
+                      {this.state.username&&this.state.type==="pharmacy"&& <Redirect from='/login' exact to='/pahrmacyprofile' /> }
+                      {this.state.username&&this.state.type==="Lab"&& <Redirect from='/login' exact to='/labprofile' /> }
+                      {this.state.username&&this.state.type==="hospital"&& <Redirect from='/login' exact to='/hospitalprofile' /> }
+                      {!this.state.type&&!this.state.username &&  <Route path='/login' exact component={Login} />}
+                      {this.state.username&&this.state.type==="admin"&& <Route path='/adminrofile' exact component={AdminProfile} />}
+                      {this.state.username&&this.state.type==="Lab"&&<Route path='/labprofile' exact component={LabProfile} />}
+                      {this.state.username&&this.state.type==="hospital"&& <Route path='/hospitalprofile' exact component={HospitalProfile} />}
+                      {this.state.username&&this.state.type==="pharmacy"&&  <Route path='/pahrmacyprofile' exact component={PharmcyProfile} />}
                   </Switch>
           </div>
     </Router>
