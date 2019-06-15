@@ -1,0 +1,33 @@
+.content{
+    margin-top: 100px;
+    margin-bottom: 50px;
+   
+}
+.row {
+     /* equal height of the children */
+  }
+  .col {
+    flex: 1; /* additionally, equal width */
+    
+    
+  }  
+.intro , .androideApp , .Doctor, .clinic , .Hospital, .lab, .pharmcy{
+               margin-top: 50px;            
+}
+.androideApp , .Doctor, .clinic , .Hospital, .lab, .pharmcy{
+    margin-top: 50px;
+    background-color: #3f6692!important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    border-bottom-left-radius: 50%;
+    padding: 50px;
+    color: white;
+    display: flex;
+    height: 500px;
+}
+.Doctor , .Hospital  , .pharmcy{
+    margin-left: 20px;
+}
+h5{
+   color: black;
+}

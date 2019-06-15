@@ -1,0 +1,29 @@
+.asideNav{
+}
+.asideNav-list{
+    background-color:#3f6692;
+    height: 800px;
+}
+
+.asideNav-list-linkes{
+    margin-top: 50px;
+
+}
+.asideNav-list-linkes a{
+    margin-top: 50px;
+    color: #fff;
+    font-size: 30px;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    color: #3f6692;
+    background-color:#fff;
+}
+a:hover{
+    color: #fff;
+}
+.tab-content{
+    margin-top: 100px;
+}
+.btn-primary{
+    margin-top: 20px;
+}
