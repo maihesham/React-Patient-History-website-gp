@@ -1,10 +1,8 @@
 import React ,{Component} from 'react';
-import '../style/login.css'
-class LoginUSer extends Component {
-  
-   
+import '../style/login.css';
 
-  
+class LoginUSer extends Component {
+ 
   render(){
     return (
 
@@ -13,6 +11,7 @@ class LoginUSer extends Component {
            <div className="row">
              <div className="col-lg-6  offset-md-2  allForm ">
                      <h2>Login</h2>
+                  
              </div>
             
              <div className="col-lg-6  offset-md-2 formit">
@@ -48,5 +47,4 @@ class LoginUSer extends Component {
     );
   }
 }
-
 export default LoginUSer;
