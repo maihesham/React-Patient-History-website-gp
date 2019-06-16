@@ -1,5 +1,10 @@
-.bg-light{
+.bg-light ,footer{
     background-color: #3f6692!important;
+}
+footer{
+    border: 1px solid #3f6692;
+    border-radius: 20px;
+    height: 200px;;
 }
 .brand,.brand:active,.brand:hover{
      color: aliceblue;
@@ -9,4 +14,21 @@
 .loginclass , .loginclass:active,.loginclass:hover{
     color: aliceblue;
     font-size: 20px;
+}
+h5{
+    margin-top: 20px;
+}
+.numberofcomments{
+    border-radius: 50%;
+}
+ul li{
+    padding-left: 8px;
+}
+footer p{
+    color: white;
+    text-align: center;
+    font-size: 20px;
+}
+img{
+    margin-top: 40px;
 }

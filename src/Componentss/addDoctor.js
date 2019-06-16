@@ -33,11 +33,11 @@ class AddDoctor extends Component{
                   <div className="row">
                         <div className="col">
                             <input type="file" name="file" id="file" autoComplete="off" multiple className="inputfile" />
-                            <label for="file"><img src={iconupload} alt=""/>certifications</label>
+                            <label ><img src={iconupload} alt=""/>certifications</label>
                         </div>
                         <div className="col">
                               <input type="file" name="file" autoComplete="off"  id="file" multiple className="inputfile" />
-                              <label for="file"><img src={iconupload} alt=""/>research paper</label>
+                              <label ><img src={iconupload} alt=""/>research paper</label>
                         </div>
                 </div>
                 <div className="form-group">

@@ -8,7 +8,7 @@ const SelectUSer = ()=> {
            <Navbarcomponents />
            <div className="row seelect">
                   <div className="col-md-4">
-                        <select  class="form-control" required >
+                        <select  className="form-control" required >
                                 <option>doctor</option>
                                 <option>Clinic</option>
                                 <option>hospital</option>
@@ -17,9 +17,9 @@ const SelectUSer = ()=> {
                             </select>
                   </div>
                   <div className="col-md-6">
-                        <div class="form-group">
-                                    <input type="text" autoComplete="off" class="form-control" required placeholder="ID" />
-                                    <button type="submit" class="btn btn-primary">Search</button>
+                        <div className="form-group">
+                                    <input type="text" autoComplete="off" className="form-control" required placeholder="ID" />
+                                    <button type="submit" className="btn btn-primary">Search</button>
                        </div>
                 </div>
                
@@ -27,7 +27,7 @@ const SelectUSer = ()=> {
                     <h3>title</h3>
                     </div>
                 <div className="col-md-7">
-                <table class="table table-dark">
+                <table className="table table-dark">
                     <thead>
                         <tr>
                         <th scope="col">#</th>

@@ -3,10 +3,11 @@ import pharmacy from '../icons/medicine.png';
 import Hospital from '../icons/ambulance.png';
 import lab from '../icons/microscope.png';
 import clinci from '../icons/nurse.png';
-import Doctor from '../icons/pill.png';
+import Doctor from '../icons/doctor.png';
 import AndeoideApp from '../icons/anpng.png';
-import logo from '../icons/exam.png'
+import logo from '../icons/exam.png';
 import '../style/home.css';
+import Footer from '../Nav/footer';
 class HomePage extends Component {
   render(){
     return (
@@ -88,7 +89,9 @@ class HomePage extends Component {
        
         </div>
         </div> 
- </div>  
+        <Footer />
+ </div> 
+
   );
   }
 }

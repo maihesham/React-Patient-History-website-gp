@@ -14,10 +14,10 @@ class AddLab extends Component {
                       <div className="form-group">
                         <input type="text" className="form-control" autoComplete="off" required placeholder="Name" />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <input type="text" className="form-control" autoComplete="off" required placeholder="Address" />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <input type="number" className="form-control" autoComplete="off" required placeholder="Phone-Number" />
                       </div>
                       <div className="form-group">
