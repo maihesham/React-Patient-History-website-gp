@@ -45,10 +45,13 @@ class AddClinci extends Component {
     })
     
   }
+  checkDOID=()=>{
+        return 1;
+  } 
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state);
-   /* if(){
+    if(this.checkDOID()){
       console.log("fo");
             this.props.DoctorIDfound();
      
@@ -56,7 +59,7 @@ class AddClinci extends Component {
       console.log("ddddd");
       this.props.GDoctorIDERROR();
       
-    }*/
+    }
     
   }
   render(){
