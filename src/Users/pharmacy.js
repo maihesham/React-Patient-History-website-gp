@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import SearchPatient from '../pages/SearchPatient ';
+import SearchPatient from '../pages/searchforPharmacy';
 
 class AdminProfile extends Component {
  render(){

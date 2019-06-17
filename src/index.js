@@ -5,11 +5,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
-import {createStore} from 'redux';
+import {createStore ,applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+
 import './index.css';
 import App from './App';
 import rootReducer from './store/RootReducer';
-const store =createStore(rootReducer);
+const store =createStore(rootReducer,applyMiddleware(thunk));
 ReactDOM.render(
     <Provider store={store}><App /></Provider>
 ,

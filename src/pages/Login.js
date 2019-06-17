@@ -1,6 +1,7 @@
 import React ,{Component} from 'react';
 import '../style/login.css';
-
+import { connect } from 'react-redux';
+import{ LoginTOREDX , ERROR }from '../Actions/useraction';
 class LoginUSer extends Component {
   state = {
     Username: null,
@@ -18,6 +19,7 @@ class LoginUSer extends Component {
      passord: e.target.value
     })
   }
+ 
   handleChangeType = (e) => {
     this.setState({
      Type: e.target.value
@@ -26,27 +28,27 @@ class LoginUSer extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+  //  console.log(this.state);
+   this.props.LoginTOREDX(this.state);
+  // this.props.ERROR();
+  
   }
 
   render(){
+    const { USERR } = this.props;
     return(
       <div>
       <div className="container"> 
            <div className="row">
              <div className="col-lg-6  offset-md-2  allForm ">
                     <h2>Login</h2>
-                  
              </div>
             
              <div className="col-lg-6  offset-md-2 formit">
              <form onSubmit={this.handleSubmit}>
-             <div className="alert  alert-danger alert-dismissible fade " role="alert">
-                    <strong>wrong Data , please Try Again</strong>  For Example: check user type 
-                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
+             <div className="center red-text">
+              { USERR.MESSAGEERROR ? <p>{USERR.MESSAGEERROR}</p> : null }
+            </div>
                 <div className="form-group">
                   <input type="text" className="form-control" required autoComplete="off" placeholder="Username" onChange={this.handleChangeUsername}/>
                 </div>
@@ -55,7 +57,7 @@ class LoginUSer extends Component {
                 </div>
                 <div className="form-group col-md-4 offset-md-1">
                       <select  className="form-control" required onChange={this.handleChangeType} >
-                         <option>..</option>
+                         <option>..choose</option>
                           <option>admin</option>
                           <option>hospital</option>
                           <option>Lab</option>
@@ -73,5 +75,15 @@ class LoginUSer extends Component {
     );
   }
 }
-
-export default LoginUSer;
+const mapStateToProps = (state) => {
+  return{
+    USERR: state.AuthUser
+  }
+}
+const mapDispatchToProps=(dispatch)=>{
+  return {
+   LoginTOREDX:(user)=>dispatch(LoginTOREDX(user))
+   ,ERROR:()=>dispatch(ERROR())
+  }
+} 
+export default  connect(mapStateToProps,mapDispatchToProps)(LoginUSer);

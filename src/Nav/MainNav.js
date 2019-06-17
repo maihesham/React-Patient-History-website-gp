@@ -2,7 +2,8 @@ import React ,{Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import logo from '../icons/exam.png'
 import '../style/nav.css';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import {LogOUTTOREDX} from '../Actions/useraction';
 class MainNAve extends Component{
     render(){
       const {Auth} = this.props;
@@ -13,12 +14,12 @@ class MainNAve extends Component{
         <img src={logo} alt="Logo" />
                 <a className="brand" href="#">patient-history</a>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-      {!Auth.USERNAME&&  <li><button type="submit" className="btn btn-primary mb-2"><NavLink className="loginclass" to='./Login'>login</NavLink></button> </li> }
-      {Auth.USERNAME&&   <li><button type="submit" className="btn btn-primary mb-2"><NavLink className="loginclass" to='./Login'>LogOut</NavLink></button> </li> }
-      {Auth.USERNAME&&              <li><button type="submit" className="btn btn-primary mb-2"><NavLink className="loginclass" to='./Login'>{Auth.USERNAME}</NavLink></button> </li> }
-      {Auth.TYPE==="pharmacy"&&         <li><button type="submit" className="btn btn-primary mb-2 numberofcomments" ><NavLink className="loginclass"  to="">3</NavLink> </button></li> } 
-                </ul>      
+           <ul className="navbar-nav mr-auto">
+                {!Auth.USERNAME&&<li><button  className="btn btn-primary mb-2"><NavLink className="loginclass" to='./Login'>login</NavLink></button> </li> }
+                {Auth.USERNAME&&<li><button  className="btn btn-primary mb-2" onClick={this.props.LogOUTTOREDX}>LogOut</button> </li> }
+                {Auth.USERNAME&&<li><button className="btn btn-primary mb-2" >{Auth.USERNAME}</button> </li> }
+                {Auth.TYPE==="pharmacy"&&<li><button className="btn btn-primary mb-2 numberofcomments" >3 </button></li> } 
+        </ul>      
                
         </div>
         </div>
@@ -29,9 +30,15 @@ class MainNAve extends Component{
     }    
       
   }
- const mapStateToProps=(state)=>{
-   return {
-     Auth:state.AuthUser
-   }
- } 
-export default  connect( mapStateToProps)(MainNAve);
+  const mapStateToProps=(state)=>{
+    return {
+      Auth:state.AuthUser
+    }
+  } 
+  const mapDispatchToProps=(dispatch)=>{
+    return {
+     LogOUTTOREDX:()=>dispatch(LogOUTTOREDX())
+    }
+  } 
+ 
+export default  connect( mapStateToProps,mapDispatchToProps)(MainNAve);
