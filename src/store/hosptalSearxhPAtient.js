@@ -1,5 +1,6 @@
 const initState = {
-    NAME:null
+     userID:null, 
+     NAME:null
     ,NATIONALID:null
     ,PHONECANCALL:null
     ,AGE:null,
@@ -13,6 +14,7 @@ const searchPAtientReducer = (state = initState, action) => {
             console.log("search here");
             return {
                 ...state,
+                 userID:action.info. userID,
                  NAME:action.info.NAME
                 ,NATIONALID:action.info.NATIONALID
                 ,PHONECANCALL:action.info.PHONECANCALL

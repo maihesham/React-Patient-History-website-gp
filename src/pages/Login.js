@@ -6,7 +6,8 @@ class LoginUSer extends Component {
   state = {
     Username: null,
     Type: null,
-    passord:null
+    passord:null,
+    numofcomments:0
   }
   handleChangeUsername = (e) => {
     this.setState({

@@ -14,6 +14,7 @@ handleChangeUserID = (e) => {
   handleSubmit = (e) => {
     e.preventDefault();
     this.patient={
+       userID:this.state.UserID,
          NAME:"mai"
         ,NATIONALID:"012222222222222222"
         ,PHONECANCALL:"01233333333"
@@ -51,6 +52,10 @@ handleChangeUserID = (e) => {
                     <div className="col-lg-7  offset-md-2">
                     <table className="table table-dark">
                              <tbody>
+                             <tr>
+                                      <th scope="row">ID</th>
+                                      <td>{patientinfo.userID}</td>
+                                 </tr>
                                   <tr>
                                       <th scope="row">name</th>
                                       <td>{patientinfo.NAME}</td>

@@ -19,3 +19,9 @@ export const ERROR=()=>{
     }
    
 };
+export const cOOMENTINCReaseONE=()=>{
+    return {
+        type:'cOOMENTINCReaseONE'
+    }
+   
+};

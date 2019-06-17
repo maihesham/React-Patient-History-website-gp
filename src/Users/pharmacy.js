@@ -5,8 +5,7 @@ class AdminProfile extends Component {
  render(){
   return (
     <div>
-       <SearchPatient />
-       
+       <SearchPatient /> 
     </div>  
 );
  }

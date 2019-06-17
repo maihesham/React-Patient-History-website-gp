@@ -2,7 +2,8 @@ const initState = {
   USERNAME:null,
   TYPE:null,
   PASSWORD:null,
-  MESSAGEERROR:null
+  MESSAGEERROR:null,
+  NUMOFCOMMENTS:null
 }
 
 const authReducer = (state = initState, action) => {
@@ -16,7 +17,8 @@ const authReducer = (state = initState, action) => {
           USERNAME:action.user.Username,
           TYPE:action.user.Type,
           PASSWORD:null,
-          MESSAGEERROR:null
+          MESSAGEERROR:null,
+          NUMOFCOMMENTS:action.user.numofcomments
       };
      case "LOGINERROR":
         console.log("error"); 
@@ -35,6 +37,12 @@ const authReducer = (state = initState, action) => {
           PASSWORD:null,
           MESSAGEERROR:null
       };
+      case"cOOMENTINCReaseONE":
+      console.log("CommentHERE"); 
+      return {
+        ...state,
+        NUMOFCOMMENTS:state.NUMOFCOMMENTS+1
+    }; 
     default:
       return state;
   }
