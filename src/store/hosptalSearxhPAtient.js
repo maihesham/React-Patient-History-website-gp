@@ -14,7 +14,7 @@ const searchPAtientReducer = (state = initState, action) => {
             console.log("search here");
             return {
                 ...state,
-                 userID:action.info. userID,
+                 userID:action.info.userID,
                  NAME:action.info.NAME
                 ,NATIONALID:action.info.NATIONALID
                 ,PHONECANCALL:action.info.PHONECANCALL

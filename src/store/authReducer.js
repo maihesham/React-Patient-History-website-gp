@@ -24,7 +24,7 @@ const authReducer = (state = initState, action) => {
         console.log("error"); 
         return {
           ...state,
-          MESSAGEERROR:"LOGIN is Filed , some thing is error , check choose ALL fileds"
+          MESSAGEERROR:"LogIn is failed , some thing is error , check choose ALL fileds"
       };
      case "LOGOUT":
         console.log("eLOGOUT"); 

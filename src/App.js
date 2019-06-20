@@ -16,9 +16,7 @@ class App extends Component {
                 <Switch>
                       {!Auth.TYPE&&!Auth.USERNAME && <Route path='/' exact component={HomePage} />} 
                       {Auth.USERNAME&&Auth.TYPE&& <Redirect from='/login' exact to="/userhomepage" /> }
-                    
-                      {!Auth.TYPE&&!Auth.USERNAM &&<Route path='/login' exact component={LoginPage} />}
-                     
+                      {!Auth.TYPE&&!Auth.USERNAM &&<Route path='/login' exact component={LoginPage} />}                     
                       {Auth.USERNAME&&Auth.TYPE&& <Route path="/userhomepage" exact component={userHomePAge} />}
                   </Switch>
           </div>

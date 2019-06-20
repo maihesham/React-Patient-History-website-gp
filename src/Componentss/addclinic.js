@@ -6,9 +6,6 @@ class AddClinci extends Component {
     docID:null,
     address:null,
     phone:null,
-    days_of_work:null,
-    hour_from:null,
-    hour_to:null
   }
   handleChangeDcotorID = (e) => {
     this.setState({
@@ -27,39 +24,46 @@ class AddClinci extends Component {
     })
     
   }
-  handleChangedayofworks = (e) => {
-    this.setState({
-    days_of_work: e.target.value
-    })
-    
-  }
-  handleChangehoursfrom = (e) => {
-    this.setState({
-     hour_from: e.target.value
-    })
-    
-  }
-  handleChangehoursto = (e) => {
-    this.setState({
-     hour_to: e.target.value
-    })
-    
-  }
+ 
   checkDOID=()=>{
         return 1;
   } 
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state);
-    if(this.checkDOID()){
-      console.log("fo");
-            this.props.DoctorIDfound();
-     
-    }else {
-      console.log("ddddd");
-      this.props.GDoctorIDERROR();
+    console.log("obb "+this.state);
+    fetch('http://localhost:8000/clinic/register',{
+    method:'post',
+    headers:{
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+      address : this.state.address,
+      phone :this.state.phone,
+      doctor : this.state.docID,
+      city :'Egypt',
+      capital : 'cairo'
       
+    }),
+  }).then(res=>{
+    console.log("ffffffffffffffffffffffffffffffffffff");
+    if(res.status!==200 && res.status!==201){
+      console.log("from status");
+      return 0;
     }
+    return res.json();
+  }).then(resData=>{
+         console.log("ddddddd  dddddd  "+resData);
+         if(resData.status===404){
+           console.log("from 404");
+           this.props.GDoctorIDERROR();
+           return 0;
+         }else if(resData.status===200){
+          this.props.DoctorIDfound();
+           console.log('from not 404 , 200 in resData');
+           return 1;
+         }
+  }) 
     
   }
   render(){
@@ -78,22 +82,13 @@ class AddClinci extends Component {
                     <div className="center red-text">
                         { MESSAGES.MESSAGE ? <p>{MESSAGES.MESSAGE}</p> : null }
                     </div>
-                      <input type="text" className="form-control" autoComplete="off" required placeholder="Doctor-ID" onChange={this.handleChangeDcotorID}/>
+                      <input type="text" className="form-control" autoComplete="off" required placeholder="Doctor-USername" onChange={this.handleChangeDcotorID}/>
                     </div>
                     <div className="form-group">
                       <input type="text" className="form-control" autoComplete="off" required placeholder="Address" onChange={this.handleChangeaddress}/>
                     </div>
                     <div className="form-group">
                       <input type="number" className="form-control" autoComplete="off" required placeholder="Phone-Number" onChange={this.handleChangePhonenumber}/>
-                    </div>
-                    <div className="form-group">
-                      <input type="text" className="form-control" autoComplete="off" required placeholder="days of work" onChange={this.handleChangedayofworks}/>
-                    </div>
-                    <div className="form-group">
-                      <input type="number" className="form-control" autoComplete="off" required placeholder="from(hour)" onChange={this.handleChangehoursfrom}/>
-                    </div>
-                    <div className="form-group">
-                      <input type="number" className="form-control" autoComplete="off"  required placeholder="to(hour)" onChange={this.handleChangehoursto}/>
                     </div>
                   <div className="form-group">
                              <button type="submit" className="btn btn-primary">Submit</button>

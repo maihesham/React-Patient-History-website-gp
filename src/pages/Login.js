@@ -1,11 +1,16 @@
 import React ,{Component} from 'react';
 import '../style/login.css';
 import { connect } from 'react-redux';
+
 import{ LoginTOREDX , ERROR }from '../Actions/useraction';
 class LoginUSer extends Component {
+  v=0;
+  b=0;
+  G=0;
+  url='';
   state = {
     Username: null,
-    Type: null,
+    Type: '..Login As ...',
     passord:null,
     numofcomments:0
   }
@@ -27,11 +32,70 @@ class LoginUSer extends Component {
     })
     console.log(this.state.Type);
   }
+  createURL=()=>{
+     if(this.state.Type==='admin'){
+       this.url='http://localhost:8000/admin/login';
+     }else if(this.state.Type==='Lab'){
+      this.url='http://localhost:8000/lab/login';
+     }else if(this.state.Type==='hospital'){
+      this.url='http://localhost:8000/hospital/login';
+     }else if(this.state.Type==='pharmacy'){
+      this.url='http://localhost:8000/pharmacy/login';
+     }
+  }
+  CheckTypeUSerName=(b)=>{
+     if(b==='..Login As ...'|| b===null){
+       return 0;
+     }else{
+       return 1;
+     }
+  }
   handleSubmit = (e) => {
     e.preventDefault();
-  //  console.log(this.state);
-   this.props.LoginTOREDX(this.state);
-  // this.props.ERROR();
+    this.b=this.state.Type;
+   this.G=this.CheckTypeUSerName(this.b);
+    if(this.G===0){
+      console.log("error from type");
+      this.props.ERROR();
+      return 0;  
+    }
+    this.createURL();
+    // /lab/login
+    if(this.url===''){
+      return 0;
+    }
+    console.log('url' , this.url);
+    fetch(this.url,{
+      method:'post',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+        username:this.state.Username,
+        password:this.state.passord
+      }),
+    }).then(res=>{
+      if(res.status!==200 && res.status!==201){
+        console.log("from status");
+        this.props.ERROR();
+        return 0;
+      }
+      return res.json();
+    }).then(resData=>{
+           console.log(resData);
+           if(resData.status===404){
+             console.log("from 404");
+             this.props.ERROR();
+             return 0;
+           }else if(resData.status===200){
+            this.props.LoginTOREDX(this.state);
+             console.log('from not 404 , 200 in resData');
+             return 1;
+           }
+    })
+   
+    // this.props.ERROR();
+    // this.props.LoginTOREDX(this.state);
   
   }
 
@@ -58,7 +122,7 @@ class LoginUSer extends Component {
                 </div>
                 <div className="form-group col-md-4 offset-md-1">
                       <select  className="form-control" required onChange={this.handleChangeType} >
-                         <option>..choose</option>
+                         <option>..Login As ...</option>
                           <option>admin</option>
                           <option>hospital</option>
                           <option>Lab</option>
@@ -68,6 +132,7 @@ class LoginUSer extends Component {
                 <div className="form-group col-md-4 offset-md-1">
                 <button type="submit" className="btn btn-primary">Submit</button>
                 </div>
+              
               </form>
                 </div>
                </div> 

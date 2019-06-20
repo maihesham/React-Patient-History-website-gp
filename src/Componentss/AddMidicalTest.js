@@ -1,11 +1,17 @@
 import React ,{Component} from 'react';
 import iconupload from '../icons/upload.png'
 import '../style/medicalTest.css'
+import { connect } from 'react-redux';
+import {  ERRORIds , finaladd} from '../Actions/addactionss';
+
 class  AddMedicalTest extends Component{
   state={
     DocID:null,
     PatID:null,
     phtot:null
+  }
+  checkids=()=>{
+            return 0;
   }
   handleChangeDoctorID = (e) => {
     this.setState({
@@ -19,14 +25,30 @@ class  AddMedicalTest extends Component{
     })
     console.log(this.state.PatID);
   }
+  handleChangephoto = (e) => {
+    this.setState({
+     phtot: e.target.value
+    })
+    console.log(this.state.PatID);
+  }
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log(this.state);
+    if(this.checkids()===1){
+             this.props.finaladd();
+    }else{
+          this.props.ERRORIds();
+    }
  
   
   }
  render(){
+  const {MESSAGES}=this.props;
   return (
     <div className="addmedicalTest"> 
+      <div className="center red-text">
+                        { MESSAGES.MESSAGE ? <p>{MESSAGES.MESSAGE}</p> : null }
+                    </div>
     <div className="container">
            
     <div className="row">
@@ -43,7 +65,7 @@ class  AddMedicalTest extends Component{
                   </div>
                   <div className="row">
                         <div className="col">
-                            <input type="file" autoComplete="off" name="file" id="file" multiple className="inputfile" />
+                            <input type="file" autoComplete="off" name="file" id="file"required  multiple className="inputfile" onChange={this.handleChangephoto} />
                             <label for="file"><img src={iconupload} alt=""/>MedicalTest</label>
                         </div>
                 </div>
@@ -61,4 +83,15 @@ class  AddMedicalTest extends Component{
  }
 }
 
-export default  AddMedicalTest;
+const mapStateToProps = (state) => {
+  return{
+    MESSAGES: state.addaction
+  }
+}
+const mapDispatchToProps=(dispatch)=>{
+  return {
+     ERRORIds:()=>dispatch(ERRORIds()),
+     finaladd:()=>dispatch(finaladd())
+  }
+} 
+export default  connect(mapStateToProps,mapDispatchToProps)( AddMedicalTest );
