@@ -18,6 +18,7 @@ class MainNAve extends Component{
                 {!Auth.USERNAME&&<li><button  className="btn btn-primary mb-2"><NavLink className="loginclass" to='./Login'>login</NavLink></button> </li> }
                 {Auth.USERNAME&&<li><button  className="btn btn-primary mb-2" onClick={this.props.LogOUTTOREDX}>LogOut</button> </li> }
                 {Auth.USERNAME&&<li><button className="btn btn-primary mb-2" >{Auth.USERNAME}</button> </li> }
+                {Auth.USERNAME&&<li><button className="btn btn-primary mb-2" >{Auth.TYPE}</button> </li> }
                 {Auth.TYPE==="pharmacy"&&<li><button className="btn btn-primary mb-2 numberofcomments" >{Auth.NUMOFCOMMENTS} </button></li> } 
         </ul>      
                

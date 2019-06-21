@@ -1,6 +1,8 @@
 import React ,{Component}from 'react';
 import '../style/medicalTest.css';
 import { connect } from 'react-redux';
+import{  errorMessage}from '../Actions/addactionss';
+
 import {Search_HOstial_patient , GETIFO_HOstial_patient} from '../Actions/hospitalsearch_patient';
 class SearchPatient extends Component {
 state = {UserID: null}
@@ -13,26 +15,65 @@ handleChangeUserID = (e) => {
   patient={}
   handleSubmit = (e) => {
     e.preventDefault();
-    this.patient={
-       userID:this.state.UserID,
-         NAME:"mai"
-        ,NATIONALID:"012222222222222222"
-        ,PHONECANCALL:"01233333333"
-        ,AGE:25,
-        GENDER:"male"
-        ,BLOODTYPE:"o+"
-        ,DESISES:["d1 ","d1 ","d1 ","d1 ","d1 "]
-    }
-    this.props.Search_HOstial_patient(this.patient);
-    this.props.GETIFO_HOstial_patient();
+    fetch('http://localhost:8000/patient/search',{
+      method:'post',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({
+         id:this.state.UserID
+      }),
+    }).then(res=>{
+      console.log("ffffffffffffffffffffffffffffffffffff");
+      if(res.status!==200 && res.status!==201){
+        console.log("from status");
+        return 0;
+      }
+      return res.json();
+    }).then(resData=>{
+           console.log(resData);
+           if(resData.status===404){
+             console.log("from 404");
+             this.props.errorMessage(resData.message);
+             return 0;
+           }else if(resData.status===200){
+             console.log('from not 404 , 200 in resData');
+             let Dis=[];
+             let y=resData.data.disease;
+             console.log("hhhhhh");
+             console.log(resData.data.disease);
+             for(var item of y) {
+               Dis.push(item.name);
+               Dis.push(" , ,");
+           }
+             this.patient={
+                userID:this.state.UserID,
+                NAME:resData.data.name
+               ,NATIONALID:resData.data.nationalId
+               ,PHONECANCALL:resData.data.phone
+               ,AGE:resData.data.age
+               ,BLOODTYPE:resData.data.blood
+               ,DESISES:Dis
+           }
+           this.props.Search_HOstial_patient(this.patient);
+           this.props.GETIFO_HOstial_patient();
+
+             return 1;
+           }
+    }) 
+   
   }    
  render(){
     const { patientinfo } = this.props; 
+    const {MESSAGES}=this.props;
     return (
         <div className="addmedicalTest"> 
         <div className="container">
                
         <div className="row">
+        <div className="center red-text">
+                        { MESSAGES.MESSAGE ? <p>{MESSAGES.MESSAGE}</p> : null }
+                    </div>
                 <div className="col-lg-7  offset-md-2">
                     <h3>search Patient</h3>
                     </div>
@@ -72,10 +113,7 @@ handleChangeUserID = (e) => {
                                     <th scope="row">Age</th>
                                       <td>{patientinfo.AGE}</td>
                                  </tr>
-                                 <tr>
-                                     <th scope="row">Gender</th>
-                                     <td>{patientinfo.GENDER}</td>
-                                </tr> 
+                              
                                 
                                 <tr>
                                      <th scope="row">BloodType</th>
@@ -100,13 +138,15 @@ handleChangeUserID = (e) => {
 
 const mapStateToProps = (state) => {
     return{
-      patientinfo:state.patientinfo
+      patientinfo:state.patientinfo,
+      MESSAGES: state.addaction
     }
   }
   const mapDispatchToProps=(dispatch)=>{
     return {
       Search_HOstial_patient:(info)=>dispatch(Search_HOstial_patient(info)),
-      GETIFO_HOstial_patient:()=>dispatch(GETIFO_HOstial_patient())
+      GETIFO_HOstial_patient:()=>dispatch(GETIFO_HOstial_patient()),
+      errorMessage:(d)=>dispatch( errorMessage(d))
     }
   } 
   export default  connect(mapStateToProps,mapDispatchToProps)(SearchPatient) ;

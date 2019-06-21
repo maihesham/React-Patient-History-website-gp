@@ -11,27 +11,33 @@ class DeleteUSer extends Component {
             type:null
       }
       createURL=()=>{
-            if(this.state.Type==='admin'){
-              this.url='http://localhost:8000/admin/delete';
-            }else if(this.state.Type==='Lab'){
+         console.log("from hereeeeeeeeeeee");
+          console.log(this.state.type);
+            if(this.state.type==='doctor'){
+              this.url='http://localhost:8000/doctor/delete';
+            }else if(this.state.type==='Lab'){
              this.url='http://localhost:8000/lab/delete';
-            }else if(this.state.Type==='hospital'){
+            }else if(this.state.type==='hospital'){
              this.url='http://localhost:8000/hospital/delete';
-            }else if(this.state.Type==='pharmacy'){
+            }else if(this.state.type==='pharmacy'){
              this.url='http://localhost:8000/pharmacy/delete';
+            }else if(this.state.type==='Clinic'){
+              this.url='http://localhost:8000/clinic/delete';
             }
          }
       handleChangeIDbutton =(e)=>{
             e.preventDefault();
             console.log(this.state);
             this.createURL();
-            fetch(this.url,{
+            console.log("url = ");
+            console.log(this.url);      
+          fetch(this.url,{
                   method:'post',
                   headers:{
                     'Content-Type':'application/json'
                   },
                   body:JSON.stringify({
-                       ID:this.state.id,
+                    username:this.state.id
                   }),
                 }).then(res=>{
                   if(res.status!==200 && res.status!==201){
@@ -43,7 +49,7 @@ class DeleteUSer extends Component {
                        console.log(resData);
                        if(resData.status===404){
                         this.props.ERRORDelete();
-                         this.props.ERROR();
+                        
                          return 0;
                        }else if(resData.status===200){
                         this.props.finalDElete();

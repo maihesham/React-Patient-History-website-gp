@@ -1,6 +1,6 @@
 import React ,{Component}from 'react';
 import { connect } from 'react-redux';
-import{ GDoctorIDERROR ,DoctorIDfound}from '../Actions/addactionss';
+import{  errorMessage}from '../Actions/addactionss';
 class AddHosptial extends Component {
   state={
     email:null,
@@ -53,13 +53,14 @@ class AddHosptial extends Component {
     }
     return res.json();
   }).then(resData=>{
-         console.log("ddddddd  dddddd  "+resData);
+         console.log("resData");
+         console.log(resData);
          if(resData.status===404){
            console.log("from 404");
-           this.props.GDoctorIDERROR();
+           this.props.errorMessage(resData.message);
            return 0;
          }else if(resData.status===200){
-          this.props.DoctorIDfound();
+          this.props.errorMessage(resData.message);
            console.log('from not 404 , 200 in resData');
            return 1;
          }
@@ -111,8 +112,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps=(dispatch)=>{
   return {
-    GDoctorIDERROR:()=>dispatch(GDoctorIDERROR()),
-    DoctorIDfound:()=>dispatch(DoctorIDfound())
+    errorMessage:(d)=>dispatch( errorMessage(d))
   }
 } 
 export default  connect(mapStateToProps,mapDispatchToProps)(AddHosptial);

@@ -1,4 +1,7 @@
 import React ,{Component}from 'react';
+import{  errorMessage}from '../Actions/addactionss';
+import { connect } from 'react-redux';
+
 class AddDoctor extends Component{
   state={
     name:null,
@@ -69,12 +72,16 @@ class AddDoctor extends Component{
       }
       return res.json();
     }).then(resData=>{
-           console.log("ddddddd  dddddd  "+resData);
+           console.log(resData);
            if(resData.status===404){
              console.log("from 404");
+             this.props.errorMessage(resData.message);
+
              return 0;
            }else if(resData.status===200){
              console.log('from not 404 , 200 in resData');
+             this.props.errorMessage(resData.message);
+
              return 1;
            }
     }) 
@@ -122,5 +129,14 @@ class AddDoctor extends Component{
   );
  }
 }
-
-export default  AddDoctor;
+const mapStateToProps = (state) => {
+  return{
+    MESSAGES: state.addaction
+  }
+}
+const mapDispatchToProps=(dispatch)=>{
+  return {
+    errorMessage:(d)=>dispatch( errorMessage(d))
+  }
+} 
+export default  connect(mapStateToProps,mapDispatchToProps)(AddDoctor);

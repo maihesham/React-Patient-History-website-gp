@@ -1,11 +1,10 @@
 import React ,{Component} from 'react';
-import SearchPatient from '../pages/SearchPatient ';
+import Hosptalblock from '../pages/hospitalactions';
 class hospitalProfile extends Component {
  render(){
   return (
-    <div>
-       <SearchPatient />
-       
+    <div>       
+        <Hosptalblock />
     </div>  
 );
  }

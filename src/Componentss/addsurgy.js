@@ -3,7 +3,7 @@ import iconupload from '../icons/upload.png'
 import '../style/medicalTest.css'
 import { connect } from 'react-redux';
 import {  ERRORIds , finaladd} from '../Actions/addactionss';
-class  AddMedicalTest extends Component{
+class  AddSurgy extends Component{
    Auth=null;
   state={
     PatID:null,
@@ -27,8 +27,8 @@ class  AddMedicalTest extends Component{
     const data = new FormData();
     data.append('username', this.state.PatID);
     data.append('file', this.state.filess);
-    data.append( 'lab',this.Auth.USERNAME);
-    fetch('http://localhost:8000/lab/addFile',{
+    data.append( 'hospital',this.Auth.USERNAME);
+    fetch('http://localhost:8000/hospital/addFile',{
       method:'post',
       body:data,
     }).then(res=>{
@@ -72,7 +72,7 @@ class  AddMedicalTest extends Component{
            
     <div className="row">
     <div className="col-lg-7  offset-md-2">
-           <h3>Add  MedicalTest</h3>
+           <h3>Add  Surgy</h3>
         </div>
           <div className="col-md-7 offset-md-2 ">
               <form onSubmit={this.handleSubmit}>
@@ -111,4 +111,4 @@ const mapDispatchToProps=(dispatch)=>{
      finaladd:()=>dispatch(finaladd())
   }
 } 
-export default  connect(mapStateToProps,mapDispatchToProps)( AddMedicalTest );
+export default  connect(mapStateToProps,mapDispatchToProps)( AddSurgy  );

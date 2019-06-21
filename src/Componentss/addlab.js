@@ -1,6 +1,6 @@
 import React ,{Component}from 'react';
 import { connect } from 'react-redux';
-import{ GDoctorIDERROR ,DoctorIDfound}from '../Actions/addactionss';
+import{  errorMessage}from '../Actions/addactionss';
 class ADDLAb extends Component {
   state={
     email:null,
@@ -53,14 +53,13 @@ class ADDLAb extends Component {
     }
     return res.json();
   }).then(resData=>{
-         console.log("ddddddd  dddddd  "+resData);
+         console.log(resData);
          if(resData.status===404){
            console.log("from 404");
-           this.props.GDoctorIDERROR();
+           this.props.errorMessage(resData.message);
            return 0;
          }else if(resData.status===200){
-          this.props.DoctorIDfound();
-           console.log('from not 404 , 200 in resData');
+          this.props.errorMessage(resData.message);
            return 1;
          }
   }) 
@@ -73,7 +72,7 @@ class ADDLAb extends Component {
              
       <div className="row">
       <div className="col-lg-7  offset-md-2">
-             <h3>Add  pharmcy</h3>
+             <h3>Add  LAb</h3>
      </div>
             <div className="col-md-7 offset-md-2 ">
                 <form onSubmit={this.handleSubmit}>
@@ -111,8 +110,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps=(dispatch)=>{
   return {
-    GDoctorIDERROR:()=>dispatch(GDoctorIDERROR()),
-    DoctorIDfound:()=>dispatch(DoctorIDfound())
+    errorMessage:(d)=>dispatch( errorMessage(d))
   }
-} 
+}  
 export default  connect(mapStateToProps,mapDispatchToProps)(ADDLAb);

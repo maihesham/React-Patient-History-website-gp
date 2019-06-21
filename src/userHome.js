@@ -10,15 +10,15 @@ import {LogOUTTOREDX} from './Actions/useraction';
 class userHome extends Component{
     render(){
       const {Auth} = this.props;
-      console.log(Auth.USERNAME+" "+Auth.TYPE);
-      if (!Auth.USERNAME&&!Auth.TYPE) return <Redirect to="/login"/> 
+       console.log(Auth.USERNAME+" "+Auth.TYPE);
+        if (!Auth.USERNAME&&!Auth.TYPE) return <Redirect to="/login"/> 
       return (
           <div>
                <MainNav />
                 {Auth.USERNAME&&Auth.TYPE==="hospital"&&   <HospitalProfile /> }
                 {Auth.USERNAME&&Auth.TYPE==="pharmacy"&& <PharmcyProfile /> }
                 {Auth.USERNAME&&Auth.TYPE==="Lab"&& <LabProfile /> }
-                {Auth.USERNAME&&Auth.TYPE==="admin"&& <AdminProfile /> }
+                {Auth.USERNAME&&Auth.TYPE==="admin"&& <AdminProfile /> } 
           </div>
 
       );

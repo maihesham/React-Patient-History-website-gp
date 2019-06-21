@@ -1,6 +1,6 @@
 import React ,{Component}from 'react';
 import { connect } from 'react-redux';
-import{ GDoctorIDERROR ,DoctorIDfound}from '../Actions/addactionss';
+import{ errorMessage}from '../Actions/clinicAddMessages';
 class AddClinci extends Component {
   state={
     docID:null,
@@ -56,11 +56,11 @@ class AddClinci extends Component {
          console.log("ddddddd  dddddd  "+resData);
          if(resData.status===404){
            console.log("from 404");
-           this.props.GDoctorIDERROR();
+           this.props.errorMessage(resData.message);
            return 0;
          }else if(resData.status===200){
-          this.props.DoctorIDfound();
-           console.log('from not 404 , 200 in resData');
+          this.props.errorMessage(resData.message);
+          console.log('from not 404 , 200 in resData');
            return 1;
          }
   }) 
@@ -106,13 +106,12 @@ class AddClinci extends Component {
 
 const mapStateToProps = (state) => {
   return{
-    MESSAGES: state.addaction
+    MESSAGES: state.clinicMESSAgESs
   }
 }
 const mapDispatchToProps=(dispatch)=>{
   return {
-    GDoctorIDERROR:()=>dispatch(GDoctorIDERROR()),
-    DoctorIDfound:()=>dispatch(DoctorIDfound())
+    errorMessage:(d)=>dispatch(errorMessage(d))
   }
 } 
 export default  connect(mapStateToProps,mapDispatchToProps)(AddClinci);

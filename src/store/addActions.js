@@ -3,6 +3,11 @@ const initState = {
 } 
 const AddActions = (state = initState, action) => {
    switch(action.type){
+       case "ERRORMESSAMGE":
+           console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+           return{
+            MESSAGE:action.d
+           }
        case "DoctorIDError":
            return {
                ...state,

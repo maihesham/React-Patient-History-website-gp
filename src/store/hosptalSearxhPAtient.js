@@ -4,8 +4,7 @@ const initState = {
     ,NATIONALID:null
     ,PHONECANCALL:null
     ,AGE:null,
-    GENDER:null
-    ,BLOODTYPE:null
+     BLOODTYPE:null
     ,DESISES:[]
 } 
 const searchPAtientReducer = (state = initState, action) => {
@@ -19,8 +18,7 @@ const searchPAtientReducer = (state = initState, action) => {
                 ,NATIONALID:action.info.NATIONALID
                 ,PHONECANCALL:action.info.PHONECANCALL
                 ,AGE:action.info.AGE,
-                GENDER:action.info.GENDER
-                ,BLOODTYPE:action.info.BLOODTYPE
+                BLOODTYPE:action.info.BLOODTYPE
                 ,DESISES:action.info.DESISES
             }
          case "GETIFO_HOstial_patient" :
