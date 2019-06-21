@@ -43,7 +43,7 @@ handleChangeUserID = (e) => {
              console.log("hhhhhh");
              console.log(resData.data.disease);
              for(var item of y) {
-               Dis.push(item.name);
+               Dis.push(item.info.name);
                Dis.push(" , ,");
            }
              this.patient={
