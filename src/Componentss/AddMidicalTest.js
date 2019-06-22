@@ -3,6 +3,8 @@ import iconupload from '../icons/upload.png'
 import '../style/medicalTest.css'
 import { connect } from 'react-redux';
 import {  ERRORIds , finaladd} from '../Actions/addactionss';
+import $ from 'jquery';
+
 class  AddMedicalTest extends Component{
    Auth=null;
   state={
@@ -15,6 +17,10 @@ class  AddMedicalTest extends Component{
     })
     console.log(this.state.PatID);
   }
+  handleREST=()=>{
+    console.log("from handle rest");
+   $('#addFormMediclaTEST').trigger("reset");
+ }
   handleChangephoto = (e) => {
     this.setState({
       filess:e.target.files[0]
@@ -32,6 +38,8 @@ class  AddMedicalTest extends Component{
       method:'post',
       body:data,
     }).then(res=>{
+      this.handleREST();
+
       console.log("ffffffffffffffffffffffffffffffffffff");
       if(res.status!==200 && res.status!==201){
         console.log("from status");
@@ -43,12 +51,15 @@ class  AddMedicalTest extends Component{
            if(resData.status===404){
              console.log("from 404");
              this.props.ERRORIds();
+             this.handleAlertError();
              return 0;
            }else if(resData.status===200){
             this.props.finaladd();
              console.log('from not 404 , 200 in resData');
+             this.handleAlertError();
              return 1;
            }
+           
     }) 
       
    /* if(this.checkids()===1){
@@ -59,23 +70,29 @@ class  AddMedicalTest extends Component{
  
   
   }
+  handleAlertError=()=>{
+    console.log("ddddddddddddddddddddddddddddddddddddddddddd");
+    $("#aletyTesMedicla").show('slow').delay(1000).fadeOut();
+  }
  render(){
   const {MESSAGES}=this.props;
   this.Auth= this.props;
 
   return (
     <div className="addmedicalTest"> 
-      <div className="center red-text">
-                        { MESSAGES.MESSAGE ? <p>{MESSAGES.MESSAGE}</p> : null }
-                    </div>
+   
     <div className="container">
            
     <div className="row">
     <div className="col-lg-7  offset-md-2">
            <h3>Add  MedicalTest</h3>
         </div>
+        <div className="alert alert-info"  id="aletyTesMedicla" role="alert">
+           { MESSAGES.MESSAGE}
+          </div>
+     </div>
           <div className="col-md-7 offset-md-2 ">
-              <form onSubmit={this.handleSubmit}>
+              <form id="addFormMediclaTEST" onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <input type="text" autoComplete="off" className="form-control" required placeholder="USer-ID" onChange={this.handleChangePatientID}/>
                   </div>
@@ -93,7 +110,7 @@ class  AddMedicalTest extends Component{
     </div>
     
  </div>
- </div> 
+  
           
   );
  }

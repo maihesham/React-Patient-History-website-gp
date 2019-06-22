@@ -3,6 +3,7 @@ import { ERRORDelete , finalDElete} from '../Actions/addactionss';
 import '../style/adduser.css';
 import Navbarcomponents from '../Componentss/navbarcomponent';
 import { connect } from 'react-redux';
+import $ from 'jquery';
 
 class DeleteUSer extends Component {
       url='';
@@ -25,6 +26,10 @@ class DeleteUSer extends Component {
               this.url='http://localhost:8000/clinic/delete';
             }
          }
+         handleREST=()=>{
+          console.log("from handle rest");
+         $('#FORMdelet').trigger("reset");
+       }
       handleChangeIDbutton =(e)=>{
             e.preventDefault();
             console.log(this.state);
@@ -46,6 +51,7 @@ class DeleteUSer extends Component {
                   }
                   return res.json();
                 }).then(resData=>{
+                  this.handleREST();
                        console.log(resData);
                        if(resData.status===404){
                         this.props.ERRORDelete();
@@ -79,8 +85,9 @@ class DeleteUSer extends Component {
                                     { MESSAGES.MESSAGE ? <p>{MESSAGES.MESSAGE}</p> : null }
                               </div>
                 </div>
+              
+                <form id="FORMdelet" onSubmit={this.handleChangeIDbutton}>
                 <div className="row seelect">
-                
                        <div className="col-md-4">
                              <select  className="form-control" required onChange={this.handleChangeType}>
                                      <option>...choose</option>
@@ -94,10 +101,12 @@ class DeleteUSer extends Component {
                        <div className="col-md-6">
                              <div className="form-group">
                                          <input type="text" className="form-control" required placeholder="ID" onChange={this.handleChangeID}/>
-                                         <button type="submit" className="btn btn-primary" onClick={this.handleChangeIDbutton}>Delete</button>
+                                         <button type="submit" className="btn btn-primary">Delete</button>
                             </div>
                      </div>
-                </div>
+                     </div>
+                     </form>
+               
           </div>
           
        );

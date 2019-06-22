@@ -1,7 +1,8 @@
 import React ,{Component}from 'react';
 import{  errorMessage}from '../Actions/addactionss';
 import { connect } from 'react-redux';
-
+import $ from 'jquery';
+import '../style/manageDives.css'
 class AddDoctor extends Component{
   state={
     name:null,
@@ -17,6 +18,10 @@ class AddDoctor extends Component{
     })
     
   }
+  handleREST=()=>{
+    console.log("from handle rest");
+   $('#addFormDoctor').trigger("reset");
+ }
   handleChangeEmail = (e) => {
     this.setState({
      email: e.target.value
@@ -65,6 +70,7 @@ class AddDoctor extends Component{
         experienceYear:this.state.yearsofexpr,
       }),
     }).then(res=>{
+      this.handleREST();
       console.log("ffffffffffffffffffffffffffffffffffff");
       if(res.status!==200 && res.status!==201){
         console.log("from status");
@@ -72,30 +78,43 @@ class AddDoctor extends Component{
       }
       return res.json();
     }).then(resData=>{
+     
            console.log(resData);
            if(resData.status===404){
              console.log("from 404");
              this.props.errorMessage(resData.message);
-
+             this.handleAlertError();
              return 0;
            }else if(resData.status===200){
              console.log('from not 404 , 200 in resData');
              this.props.errorMessage(resData.message);
-
+             this.handleAlertError();
              return 1;
            }
+           
     }) 
   }
+  handleAlertError=()=>{
+    console.log("ddddddddddddddddddddddddddddddddddddddddddd");
+    $("#aletyDocotr").show('slow').delay(1000).fadeOut();
+  }
  render(){
+  const {MESSAGES}=this.props;
+
   return (
     <div>
            
     <div className="row">
     <div className="col-lg-7  offset-md-2">
            <h3>Add  Doctor</h3>
-   </div>
+     </div>
+     <div className="col-lg-7  offset-md-2">
+     <div className="alert alert-info"  id="aletyDocotr" role="alert">
+           { MESSAGES.MESSAGE}
+          </div>
+     </div>
           <div className="col-md-7 offset-md-2 ">
-              <form onSubmit={this.handleSubmit}>
+              <form id="addFormDoctor" onSubmit={this.handleSubmit}>
               
                   <div className="form-group">
                     <input type="text" className="form-control" autoComplete="off" required placeholder="Doctor-name" onChange={this.handleChangename}/>

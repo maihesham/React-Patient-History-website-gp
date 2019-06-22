@@ -1,6 +1,8 @@
 import React ,{Component}from 'react';
 import { connect } from 'react-redux';
 import{  errorMessage}from '../Actions/addactionss';
+import $ from 'jquery';
+
 class ADDLAb extends Component {
   state={
     email:null,
@@ -12,6 +14,10 @@ class ADDLAb extends Component {
      email: e.target.value
     })
   }
+  handleREST=()=>{
+    console.log("from handle rest");
+   $('#addFormLab').trigger("reset");
+ }
   handleChangeaddress = (e) => {
     this.setState({
      address: e.target.value
@@ -46,6 +52,8 @@ class ADDLAb extends Component {
       
     }),
   }).then(res=>{
+    this.handleREST();
+
     console.log("ffffffffffffffffffffffffffffffffffff");
     if(res.status!==200 && res.status!==201){
       console.log("from status");
@@ -57,13 +65,19 @@ class ADDLAb extends Component {
          if(resData.status===404){
            console.log("from 404");
            this.props.errorMessage(resData.message);
+           this.handleAlertError();
            return 0;
          }else if(resData.status===200){
           this.props.errorMessage(resData.message);
+          this.handleAlertError();
            return 1;
          }
   }) 
     
+  }
+  handleAlertError=()=>{
+    console.log("ddddddddddddddddddddddddddddddddddddddddddd");
+    $("#aletylab").show('slow').delay(1000).fadeOut();
   }
   render(){
     const {MESSAGES}=this.props;
@@ -74,13 +88,15 @@ class ADDLAb extends Component {
       <div className="col-lg-7  offset-md-2">
              <h3>Add  LAb</h3>
      </div>
+     <div className="alert alert-info"  id="aletylab" role="alert">
+           { MESSAGES.MESSAGE}
+          </div>
+     </div>
             <div className="col-md-7 offset-md-2 ">
-                <form onSubmit={this.handleSubmit}>
+                <form id="addFormLab" onSubmit={this.handleSubmit}>
                 
                     <div className="form-group">
-                    <div className="center red-text">
-                        { MESSAGES.MESSAGE ? <p>{MESSAGES.MESSAGE}</p> : null }
-                    </div>
+                  
                       <input type="email" className="form-control" autoComplete="off" required placeholder="email" onChange={this.handleChangeDcotorID}/>
                     </div>
                     <div className="form-group">
@@ -96,7 +112,7 @@ class ADDLAb extends Component {
             </div>
       </div>
       
-   </div>
+  
   
           
       );

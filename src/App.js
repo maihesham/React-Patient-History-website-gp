@@ -11,7 +11,7 @@ class App extends Component {
   render(){
     const {Auth} = this.props;
     console.log(Auth.USERNAME+" "+Auth.TYPE);
-   
+    {Auth.TYPE && setTimeout(<Redirect from='/userhomepage' exact to='/login' />,1000)} 
 
     return (
       <Router>

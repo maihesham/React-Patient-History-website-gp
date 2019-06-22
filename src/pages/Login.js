@@ -1,8 +1,9 @@
 import React ,{Component} from 'react';
 import '../style/login.css';
 import { connect } from 'react-redux';
-
 import{ LoginTOREDX , ERROR }from '../Actions/useraction';
+import $ from 'jquery';
+
 class LoginUSer extends Component {
   
   v=0;
@@ -14,6 +15,10 @@ class LoginUSer extends Component {
     Type: '..Login As ...',
     passord:null,
     numofcomments:0
+  }
+  handleREST=(e)=>{
+     console.log("from handle rest");
+    $('#LoginForm').trigger("reset");
   }
   handleChangeUsername = (e) => {
     this.setState({
@@ -117,7 +122,7 @@ class LoginUSer extends Component {
              </div>
             
              <div className="col-lg-6  offset-md-2 formit">
-             <form onSubmit={this.handleSubmit}>
+             <form id="LoginForm" onSubmit={this.handleSubmit}>
              <div className="center red-text">
               { USERR.MESSAGEERROR ? <p>{USERR.MESSAGEERROR}</p> : null }
             </div>

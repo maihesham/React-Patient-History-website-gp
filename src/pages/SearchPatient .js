@@ -2,7 +2,7 @@ import React ,{Component}from 'react';
 import '../style/medicalTest.css';
 import { connect } from 'react-redux';
 import{  errorMessage}from '../Actions/addactionss';
-
+import $ from 'jquery';
 import {Search_HOstial_patient , GETIFO_HOstial_patient} from '../Actions/hospitalsearch_patient';
 class SearchPatient extends Component {
 state = {UserID: null}
@@ -13,6 +13,9 @@ handleChangeUserID = (e) => {
     console.log(this.state.UserID);
   }
   patient={}
+  handleReset=()=>{
+    $("#formSerchHosptial").trigger("reset");
+  }
   handleSubmit = (e) => {
     e.preventDefault();
     fetch('http://localhost:8000/patient/search',{
@@ -24,6 +27,7 @@ handleChangeUserID = (e) => {
          id:this.state.UserID
       }),
     }).then(res=>{
+      this.handleReset();
       console.log("ffffffffffffffffffffffffffffffffffff");
       if(res.status!==200 && res.status!==201){
         console.log("from status");
@@ -78,7 +82,7 @@ handleChangeUserID = (e) => {
                     <h3>search Patient</h3>
                     </div>
                     <div className="col-md-7 offset-md-2 ">
-                          <form onSubmit={this.handleSubmit}>
+                          <form id="formSerchHosptial" onSubmit={this.handleSubmit}>
                             <div className="form-group">
                                 <input type="text" className="form-control" autoComplete="off" required placeholder="USer-ID" onChange={this.handleChangeUserID}/>
                             </div>

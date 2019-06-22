@@ -1,12 +1,18 @@
 import React ,{Component}from 'react';
 import { connect } from 'react-redux';
 import{  errorMessage}from '../Actions/addactionss';
+import $ from 'jquery';
+
 class AddHosptial extends Component {
   state={
     email:null,
     address:null,
     phone:null,
   }
+  handleREST=()=>{
+    console.log("from handle rest");
+   $('#addFormHosptial').trigger("reset");
+ }
   handleChangeDcotorID = (e) => {
     this.setState({
      email: e.target.value
@@ -46,6 +52,7 @@ class AddHosptial extends Component {
       
     }),
   }).then(res=>{
+    this.handleREST();
     console.log("ffffffffffffffffffffffffffffffffffff");
     if(res.status!==200 && res.status!==201){
       console.log("from status");
@@ -53,19 +60,26 @@ class AddHosptial extends Component {
     }
     return res.json();
   }).then(resData=>{
+   
          console.log("resData");
          console.log(resData);
          if(resData.status===404){
            console.log("from 404");
            this.props.errorMessage(resData.message);
+           this.handleAlertError();
            return 0;
          }else if(resData.status===200){
           this.props.errorMessage(resData.message);
+          this.handleAlertError();
            console.log('from not 404 , 200 in resData');
            return 1;
          }
   }) 
     
+  }
+  handleAlertError=()=>{
+    console.log("ddddddddddddddddddddddddddddddddddddddddddd");
+    $("#aletyhosptial").show('slow').delay(1000).fadeOut();
   }
   render(){
     const {MESSAGES}=this.props;
@@ -76,13 +90,15 @@ class AddHosptial extends Component {
       <div className="col-lg-7  offset-md-2">
              <h3>Add  Hosptial</h3>
      </div>
+     <div className="alert alert-info"  id="aletyhosptial" role="alert">
+           { MESSAGES.MESSAGE}
+          </div>
+     </div>
             <div className="col-md-7 offset-md-2 ">
-                <form onSubmit={this.handleSubmit}>
+                <form id="addFormHosptial" onSubmit={this.handleSubmit}>
                 
                     <div className="form-group">
-                    <div className="center red-text">
-                        { MESSAGES.MESSAGE ? <p>{MESSAGES.MESSAGE}</p> : null }
-                    </div>
+              
                       <input type="email" className="form-control" autoComplete="off" required placeholder="email" onChange={this.handleChangeDcotorID}/>
                     </div>
                     <div className="form-group">
@@ -98,7 +114,7 @@ class AddHosptial extends Component {
             </div>
       </div>
       
-   </div>
+   
   
           
       );

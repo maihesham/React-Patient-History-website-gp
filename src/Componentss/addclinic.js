@@ -1,6 +1,8 @@
 import React ,{Component}from 'react';
 import { connect } from 'react-redux';
 import{ errorMessage}from '../Actions/clinicAddMessages';
+import $ from 'jquery';
+
 class AddClinci extends Component {
   state={
     docID:null,
@@ -24,7 +26,10 @@ class AddClinci extends Component {
     })
     
   }
- 
+  handleREST=()=>{
+    console.log("from handle rest");
+   $('#addFormClinic').trigger("reset");
+ }
   checkDOID=()=>{
         return 1;
   } 
@@ -46,6 +51,8 @@ class AddClinci extends Component {
       
     }),
   }).then(res=>{
+    this.handleREST();
+
     console.log("ffffffffffffffffffffffffffffffffffff");
     if(res.status!==200 && res.status!==201){
       console.log("from status");
@@ -57,14 +64,23 @@ class AddClinci extends Component {
          if(resData.status===404){
            console.log("from 404");
            this.props.errorMessage(resData.message);
+           this.handleAlertError();
+
            return 0;
          }else if(resData.status===200){
           this.props.errorMessage(resData.message);
           console.log('from not 404 , 200 in resData');
+          this.handleAlertError();
+
            return 1;
+
          }
   }) 
     
+  }
+  handleAlertError=()=>{
+    console.log("ddddddddddddddddddddddddddddddddddddddddddd");
+    $("#aletyclinc").show('slow').delay(1000).fadeOut();
   }
   render(){
     const {MESSAGES}=this.props;
@@ -75,13 +91,15 @@ class AddClinci extends Component {
       <div className="col-lg-7  offset-md-2">
              <h3>Add  clinic</h3>
      </div>
+     <div className="alert alert-info"  id="aletyclinc" role="alert">
+           { MESSAGES.MESSAGE}
+          </div>
+   
             <div className="col-md-7 offset-md-2 ">
-                <form onSubmit={this.handleSubmit}>
+                <form id="addFormClinic" onSubmit={this.handleSubmit}>
                 
                     <div className="form-group">
-                    <div className="center red-text">
-                        { MESSAGES.MESSAGE ? <p>{MESSAGES.MESSAGE}</p> : null }
-                    </div>
+                  
                       <input type="text" className="form-control" autoComplete="off" required placeholder="Doctor-USername" onChange={this.handleChangeDcotorID}/>
                     </div>
                     <div className="form-group">
