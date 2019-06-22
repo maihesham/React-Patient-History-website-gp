@@ -7,15 +7,31 @@ import { connect } from 'react-redux';
 import userHomePAge from './userHome';
 import Logout from './Logout'
 class App extends Component {
- 
-  render(){
-    const {Auth} = this.props;
-    console.log(Auth.USERNAME+" "+Auth.TYPE);
-    {Auth.TYPE && setTimeout(<Redirect from='/userhomepage' exact to='/login' />,1000)} 
+  state={
+    count:0
+  }
+  componentDidMount(){
+    this.myInterval=setInterval(()=>{
+      this.setState(prevState=>({
+          count:prevState.count+1,
+          
+      }), this.go())
+    },1000)
+    
+  }
+  go=()=>{
+    console.log("from go");
+    if(this.state.count===200){
+      setTimeout(window.location = '/login',100*60*60*60*60*60*60*60);
 
+    }
+  }
+  render(){
+    const {Auth} = this.props;     
     return (
       <Router>
         <div className="App"> 
+      <h2>{this.state.count}</h2>
                 <Switch>
                        <Route path='/logout' exact component={Logout} />
                        <Redirect from='/logout' exact to='/login' />
@@ -29,6 +45,7 @@ class App extends Component {
     </Router>
     );
   }
+ 
 }
 const mapStateToProps=(state)=>{
   return {

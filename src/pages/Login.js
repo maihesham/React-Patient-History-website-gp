@@ -107,12 +107,6 @@ class LoginUSer extends Component {
 
   render(){
     const { USERR } = this.props;
-    console.log(new Date().toLocaleTimeString());
-    let X=new Date().toLocaleTimeString();
-    
-    var Y=X[0]+X[1];
-    var T=Number(Y);
-    console.log(T+5);
     return(
       <div>
       <div className="container"> 

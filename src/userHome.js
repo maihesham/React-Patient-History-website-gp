@@ -11,8 +11,6 @@ class userHome extends Component{
     render(){
       const {Auth} = this.props;
        console.log(Auth.USERNAME+" "+Auth.TYPE);
-    
-    
       return ( 
           <div>
                {

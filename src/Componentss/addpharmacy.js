@@ -8,6 +8,7 @@ class ADDPharmcy extends Component {
     email:null,
     address:null,
     phone:null,
+    name:null
   }
   handleChangeDcotorID = (e) => {
     this.setState({
@@ -34,6 +35,11 @@ class ADDPharmcy extends Component {
   checkDOID=()=>{
         return 1;
   } 
+  handleChangename =(e)=>{
+    this.setState({
+      name: e.target.value
+     })
+  }
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state);
@@ -49,6 +55,7 @@ class ADDPharmcy extends Component {
       email : this.state.email,
       city :'Egypt',
       capital : 'cairo'
+      ,name:this.state.name
       
     }),
   }).then(res=>{
@@ -97,7 +104,11 @@ class ADDPharmcy extends Component {
      </div>
             <div className="col-md-7 offset-md-2 ">
                 <form id="addFormPharmcy"  onSubmit={this.handleSubmit}>
-                
+                <div className="form-group">
+                   
+                   <input type="text" className="form-control" autoComplete="off" required placeholder="NAme" 
+                   onChange={this.handleChangename}/>
+                 </div>
                     <div className="form-group">
                    
                       <input type="email" className="form-control" autoComplete="off" required placeholder="email" onChange={this.handleChangeDcotorID}/>
