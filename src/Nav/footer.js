@@ -11,7 +11,7 @@ const Footer=() =>{
                       <div className="row">
                           <div className="col-md-4">
                                  <h6>To contect us send your email</h6>
-                                 <p>if your are a docotr or hospital or paitent send to us to connect then can create account and manage process efficent</p>
+                                 <p>to registration in out app need to contact with us  </p>
                           </div>
                           <div className="col-md-3">
                                   <form>

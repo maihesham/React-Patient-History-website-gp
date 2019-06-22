@@ -9,7 +9,7 @@ const initState = {
 const authReducer = (state = initState, action) => {
   switch(action.type){
     case"LOGIN":
-        console.log("logn from here "+action.user); 
+        console.log("logn from here "+action.user+" "+sessionStorage.getItem('username')); 
         return {
           ...state,
           USERNAME:state.USERNAME,

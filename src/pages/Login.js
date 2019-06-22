@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import{ LoginTOREDX , ERROR }from '../Actions/useraction';
 class LoginUSer extends Component {
+  
   v=0;
   b=0;
   G=0;
@@ -88,7 +89,7 @@ class LoginUSer extends Component {
              this.props.ERROR();
              return 0;
            }else if(resData.status===200){
-            this.props.LoginTOREDX(this.state);
+            this.props.LoginTOREDX(this.state);           
              console.log('from not 404 , 200 in resData');
              return 1;
            }
@@ -101,6 +102,12 @@ class LoginUSer extends Component {
 
   render(){
     const { USERR } = this.props;
+    console.log(new Date().toLocaleTimeString());
+    let X=new Date().toLocaleTimeString();
+    
+    var Y=X[0]+X[1];
+    var T=Number(Y);
+    console.log(T+5);
     return(
       <div>
       <div className="container"> 

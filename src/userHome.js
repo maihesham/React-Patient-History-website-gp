@@ -11,14 +11,25 @@ class userHome extends Component{
     render(){
       const {Auth} = this.props;
        console.log(Auth.USERNAME+" "+Auth.TYPE);
-        if (!Auth.USERNAME&&!Auth.TYPE) return <Redirect to="/login"/> 
-      return (
+      if (!Auth.USERNAME&&!Auth.TYPE) {
+        return(
+          <Redirect from='/userhomepage' exact to='/login' />
+        );
+      }
+    
+      return ( 
           <div>
-               <MainNav />
+               {!Auth.TYPE && <Redirect from='/userhomepage' exact to='/login' />}
+               {
+                 Auth.TYPE&&
+                 <MainNav />
+                       
+               }
                 {Auth.USERNAME&&Auth.TYPE==="hospital"&&   <HospitalProfile /> }
                 {Auth.USERNAME&&Auth.TYPE==="pharmacy"&& <PharmcyProfile /> }
                 {Auth.USERNAME&&Auth.TYPE==="Lab"&& <LabProfile /> }
                 {Auth.USERNAME&&Auth.TYPE==="admin"&& <AdminProfile /> } 
+              
           </div>
 
       );

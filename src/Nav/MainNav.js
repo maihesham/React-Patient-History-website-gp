@@ -8,6 +8,8 @@ class MainNAve extends Component{
     render(){
       const {Auth} = this.props;
       console.log(Auth.USERNAME+" "+Auth.TYPE);
+        console.log(sessionStorage.getItem('username'));
+      
       return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
@@ -16,10 +18,10 @@ class MainNAve extends Component{
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
            <ul className="navbar-nav mr-auto">
                 {!Auth.USERNAME&&<li><button  className="btn btn-primary mb-2"><NavLink className="loginclass" to='./Login'>login</NavLink></button> </li> }
-                {Auth.USERNAME&&<li><button  className="btn btn-primary mb-2" onClick={this.props.LogOUTTOREDX}>LogOut</button> </li> }
+                {Auth.USERNAME&&<li><button  className="btn btn-primary mb-2" onClick={this.props.LogOUTTOREDX}><NavLink className="loginclass" to='./Logout'>logout</NavLink></button> </li> }
                 {Auth.USERNAME&&<li><button className="btn btn-primary mb-2" >{Auth.USERNAME}</button> </li> }
                 {Auth.USERNAME&&<li><button className="btn btn-primary mb-2" >{Auth.TYPE}</button> </li> }
-                {Auth.TYPE==="pharmacy"&&<li><button className="btn btn-primary mb-2 numberofcomments" >{Auth.NUMOFCOMMENTS} </button></li> } 
+               <li><button className="btn btn-primary mb-2 numberofcomments" >{ new Date().toLocaleTimeString() } </button></li> 
         </ul>      
                
         </div>

@@ -5,9 +5,14 @@ import {SEARCH_FOR_Pharmcy_GET_PATIENT , GETIFO_Pharmcy_patient , COMMENT} from 
 import {cOOMENTINCReaseONE} from '../Actions/useraction';
 class SearchPatientForPharmcy extends Component {
   patient={}
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.patient={
+  state={Comment:null,userID:null,PhID:null}
+  handleChangeComment = (e) => {
+    this.setState({
+      Comment: e.target.value
+    })
+   
+  }
+  /** this.patient={
         AGE:25,
         GENDER:"male"
         ,BLOODTYPE:"o+"
@@ -15,11 +20,92 @@ class SearchPatientForPharmcy extends Component {
         MEDICIEN:["M1","M1","M1","M1","M1","M1"]
     }
     this.props.SEARCH_FOR_Pharmcy_GET_PATIENT(this.patient);
-    this.props.GETIFO_Pharmcy_patient();
+    this.props.GETIFO_Pharmcy_patient(); */
+  handleSubmit = (e) => {
+    e.preventDefault();
+    fetch('http://localhost:8000/pharmacy/randomPatient',{
+      method:'post',
+      headers:{
+        'Content-Type':'application/json'
+      }
+    }).then(res=>{
+      if(res.status!==200 && res.status!==201){
+        console.log("from status");
+        return 0;
+      }
+      return res.json();
+    }).then(resData=>{
+           console.log(resData);
+           if(resData.status===404){
+             console.log("from 404");
+          
+             return 0;
+           }else if(resData.status===200){
+             console.log('from not 404 , 200 in resData');
+             let Dis=[];
+             let y=resData.medicine.medicines;
+             for(var item of y) {
+               Dis.push(item);
+               Dis.push(" , ,");
+           }
+           console.log("patient medicien ");
+           console.log(Dis);
+           this.state.userID=resData.medicine.id;
+             this.patient={
+              id:resData.medicine.id,
+              MEDICIEN:Dis
+          }
+          this.props.SEARCH_FOR_Pharmcy_GET_PATIENT(this.patient);
+          this.props.GETIFO_Pharmcy_patient();
+
+             return 1;
+           }
+    }) 
+   
   }  
   handleSubmitComment = (e) => {
     e.preventDefault();
-    this.patient={
+    console.log( "user ID ",this.state.userID);
+    console.log("Pharmcy ID ",this.state.PhID);
+    console.log("comment   ",this.state.Comment);
+    fetch('http://localhost:8000/pharmacy/comment',{
+      method:'post',
+      headers:{
+        'Content-Type':'application/json'
+      },body:JSON.stringify({
+        userId :this.state.userID,
+        comment :this.state.Comment,
+        pharmacyId :this.state.PhID
+      })
+    }).then(res=>{
+      console.log("ffffffffffffffffffffffffffffffffffff");
+      if(res.status!==200 && res.status!==201){
+        console.log("from status");
+        return 0;
+      }
+      return res.json();
+    }).then(resData=>{
+      console.log("from dddddddddddddddddddddddd");
+           console.log(resData);
+           if(resData.status===404){
+             console.log("from 404");
+             return 0;
+           }else if(resData.status===200){
+             console.log('from not 404 , 200 in resData');
+             return 1;
+           }
+           this.patient={
+            id:null,
+            MEDICIEN:[]
+        }
+        this.props.SEARCH_FOR_Pharmcy_GET_PATIENT(this.patient);
+        this.props.GETIFO_Pharmcy_patient();
+        this.props.COMMENT();
+    }) 
+   
+
+
+  /*  this.patient={
         AGE:null,
         GENDER:null
         ,BLOODTYPE:null
@@ -28,12 +114,13 @@ class SearchPatientForPharmcy extends Component {
     }
     this.props.SEARCH_FOR_Pharmcy_GET_PATIENT(this.patient);
     this.props.GETIFO_Pharmcy_patient();
-    this.props.COMMENT();
-    this.props.cOOMENTINCReaseONE();
+    this.props.COMMENT();*/
   }  
  
  render(){
-    const { patientinfo ,USERR} = this.props; 
+   console.log("sssssssssssss" , this.state.userID);
+   const {patientinfo, USERR}= this.props; 
+   this.state.PhID=USERR.USERNAME;
     return (
         <div className="addmedicalTest"> 
         <div className="container">
@@ -51,7 +138,7 @@ class SearchPatientForPharmcy extends Component {
                     <div className="col-md-7 offset-md-2 ">
                           <form onSubmit={this.handleSubmit}>
                             <div className="form-group">
-                                    <button type="submit" className="btn btn-primary">comment</button>
+                                    <button type="submit" className="btn btn-primary">Search</button>
                             </div>
                         </form>
                     </div>
@@ -61,39 +148,21 @@ class SearchPatientForPharmcy extends Component {
                     <div className="col-lg-7  offset-md-2">
                     <table className="table table-dark">
                              <tbody>
-                                
-                                 <tr>
-                                    <th scope="row">Age</th>
-                                      <td>{patientinfo.AGE}</td>
-                                 </tr>
-                                 <tr>
-                                     <th scope="row">Gender</th>
-                                     <td>{patientinfo.GENDER}</td>
-                                </tr> 
-                                
-                                <tr>
-                                     <th scope="row">BloodType</th>
-                                     <td>{patientinfo.BLOODTYPE}</td>
-                                </tr> 
-                                <tr>
-                                       <th scope="row">DESISES</th>
-                                       <td>{patientinfo.DESISES}</td>
-                                </tr>  
-                                <tr>
-                                       <th scope="row">MEdicien</th>
+                                     <tr>
+                                       <th scope="row">medicine</th>
                                        <td>{patientinfo.MEDICIEN}</td>
-                                </tr>                        
+                                       </tr>                        
                                            </tbody>
                                                         
                              </table>
                         </div>
                 </div>
                
-              {patientinfo.DESISES && patientinfo.AGE!==null ? 
+              {patientinfo.id ? 
                 <div className="col-md-7 offset-md-2 ">
                           <form onSubmit={this.handleSubmitComment}>
                           <div className="form-group">
-                          <textarea className="form-control" required id="exampleFormControlTextarea1" rows="3"></textarea>
+                          <textarea className="form-control" required id="exampleFormControlTextarea1" onChange={this.handleChangeComment} rows="3"></textarea>
 
                             </div>
                             <div className="form-group">

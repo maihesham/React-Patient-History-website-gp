@@ -1,9 +1,6 @@
 const initState = {
   
-   AGE:null,
-   GENDER:null
-   ,BLOODTYPE:null
-   ,DESISES:[],
+   id:null,
    MEDICIEN:[]
    ,MESSAGETHI:null
 } 
@@ -13,11 +10,8 @@ const searchPAtientforPharmcyReducer = (state = initState, action) => {
            console.log("search here");
            return {
                ...state,
-               AGE:action.info.AGE,
-               GENDER:action.info.GENDER
-               ,BLOODTYPE:action.info.BLOODTYPE
-               ,DESISES:action.info.DESISES
-               , MEDICIEN:action.info.MEDICIEN,
+             id:action.info.id
+            , MEDICIEN:action.info.MEDICIEN,
                MESSAGETHI:null
            }
         case "GETIFO_Pharmcy_patient" :
@@ -28,10 +22,7 @@ const searchPAtientforPharmcyReducer = (state = initState, action) => {
        case "COMMENT":
            return{
             ...state,
-            AGE:null,
-            GENDER:null
-            ,BLOODTYPE:null
-            ,DESISES:null
+            id:null
             , MEDICIEN:null,
             MESSAGETHI:"THink for Comment"
            }     

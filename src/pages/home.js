@@ -18,13 +18,16 @@ class HomePage extends Component {
         <div className="content">
           
          <div className="container"> 
+          
              <div className="row">
-                 <div className="intro col-mid-4">
+                 <div className="intro col-md-12">
                              <div className="media">
                               <img src={logo} alt="Logo" className="align-self-start mr-3" />
                               <div className="media-body">
-                                <h5 >intro about app and web-site</h5>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                <h2> Patient History  app and web-site</h2>
+                                <p>main purpose is to ease communication between doctor and patient</p>
+                                <p> AndeoideApp removes any unnecessary mileage from the patients’ answers to the doctors’ questions by giving the doctors access to the patients’ medical history and data.</p>
+                                <p> Our main platform is an android application. In addition, we will create a web application that supports multiple user types.</p>
                               </div>
                             </div>
                  </div>
@@ -34,8 +37,11 @@ class HomePage extends Component {
                          <div className="media">
                                <img src={AndeoideApp} alt="Logo" className="align-self-start mr-3" />
                                <div className="media-body">
-                                 <h5 className="mt-0">androideApp</h5>
-                                 <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                 <h5 className="mt-0">AndroideApp</h5>
+                                 <p>include Doctor ,  Patient , clinic </p>
+                                 <h5 className="mt-0">Patient</h5>
+                                 <p>just download App  , save your medical information in our app , no papers again  </p>
+                                 <p>To protect the your privacy and protect their data, you have to approve the doctor's’ request to access their data.</p>
                                </div>
                              </div>
                   </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
@@ -44,7 +50,8 @@ class HomePage extends Component {
                               <img src={Doctor} alt="Logo" className="align-self-start mr-3" />
                               <div className="media-body">
                                 <h5 className="mt-0">Doctor</h5>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                <p>can keep in contact with their patients using our app </p>
+                                <p>manage dates in each clinic </p>
                               </div>
                    </div>
                  </div>
@@ -52,8 +59,8 @@ class HomePage extends Component {
                  <div className="media">
                               <img src={clinci} alt="Logo" className="align-self-start mr-3" />
                               <div className="media-body">
-                                <h5 className="mt-0">clincc</h5>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                <h5 className="mt-0"> Clinic</h5>
+                                <p>user login in system as clinic Can Add , Update and Delete appointment to this clinic</p>
                               </div>
                    </div>
                  </div>
@@ -62,7 +69,7 @@ class HomePage extends Component {
                               <img src={Hospital} alt="Logo" className="align-self-start mr-3" />
                               <div className="media-body">
                                 <h5 className="mt-0"> Hospital</h5>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                <p>Hospital can show Urgent patient information using public ip associated to patient id</p>
                               </div>
                  </div>
                  </div>
@@ -70,9 +77,8 @@ class HomePage extends Component {
                  <div className="media">
                               <img src={lab} alt="Logo" className="align-self-start mr-3" />
                               <div className="media-body">
-                                <h5 className="mt-0"> lab</h5>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
-                                   vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                <h5 className="mt-0"> Lab</h5>
+                                <p>can add medical tests by idpublic to patient</p>
                               </div>
                  </div>
                  </div>
@@ -81,7 +87,8 @@ class HomePage extends Component {
                               <img src={pharmacy} alt="Logo" className="align-self-start mr-3" />
                               <div className="media-body">
                                 <h5 className="mt-0"> pharmcy</h5>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                <p>comment in medicine list if has any conflict</p>
+                                <p>after a certain number of reviews pharmacy allowed to show ads </p>
                               </div>
                  </div>
                  </div>
