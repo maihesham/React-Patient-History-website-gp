@@ -21,7 +21,6 @@ class MainNAve extends Component{
                 {Auth.USERNAME&&<li><button  className="btn btn-primary mb-2" onClick={this.props.LogOUTTOREDX}><NavLink className="loginclass" to='./Logout'>logout</NavLink></button> </li> }
                 {Auth.USERNAME&&<li><button className="btn btn-primary mb-2" >{Auth.USERNAME}</button> </li> }
                 {Auth.USERNAME&&<li><button className="btn btn-primary mb-2" >{Auth.TYPE}</button> </li> }
-               <li><button className="btn btn-primary mb-2 numberofcomments" >{ new Date().toLocaleTimeString() } </button></li> 
         </ul>      
                
         </div>

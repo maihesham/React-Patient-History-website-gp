@@ -8,7 +8,7 @@ class MainNAveEmpty extends Component{
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
         <img src={logo} alt="Logo" />
-                <a className="brand" href="#">patient-history</a>
+                <a className="brand">patient-history</a>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
            <ul className="navbar-nav mr-auto">
         </ul>      

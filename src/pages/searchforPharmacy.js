@@ -3,6 +3,8 @@ import '../style/medicalTest.css';
 import { connect } from 'react-redux';
 import {SEARCH_FOR_Pharmcy_GET_PATIENT , GETIFO_Pharmcy_patient , COMMENT} from '../Actions/pharmcyActions';
 import {cOOMENTINCReaseONE} from '../Actions/useraction';
+import $ from 'jquery';
+
 class SearchPatientForPharmcy extends Component {
   patient={}
   state={Comment:null,userID:null,PhID:null}
@@ -12,15 +14,6 @@ class SearchPatientForPharmcy extends Component {
     })
    
   }
-  /** this.patient={
-        AGE:25,
-        GENDER:"male"
-        ,BLOODTYPE:"o+"
-        ,DESISES:["d1 ","d1 ","d1 ","d1 ","d1 "],
-        MEDICIEN:["M1","M1","M1","M1","M1","M1"]
-    }
-    this.props.SEARCH_FOR_Pharmcy_GET_PATIENT(this.patient);
-    this.props.GETIFO_Pharmcy_patient(); */
   handleSubmit = (e) => {
     e.preventDefault();
     fetch('http://localhost:8000/pharmacy/randomPatient',{
@@ -87,20 +80,22 @@ class SearchPatientForPharmcy extends Component {
     }).then(resData=>{
       console.log("from dddddddddddddddddddddddd");
            console.log(resData);
+           console.log(resData.comments);
            if(resData.status===404){
              console.log("from 404");
-             return 0;
            }else if(resData.status===200){
              console.log('from not 404 , 200 in resData');
-             return 1;
+             //resData.comments
            }
+           console.log("herrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");           
            this.patient={
             id:null,
             MEDICIEN:[]
         }
         this.props.SEARCH_FOR_Pharmcy_GET_PATIENT(this.patient);
         this.props.GETIFO_Pharmcy_patient();
-        this.props.COMMENT();
+        console.log(resData.comments);
+        this.props.COMMENT(resData.comments);
     }) 
    
 
@@ -116,7 +111,14 @@ class SearchPatientForPharmcy extends Component {
     this.props.GETIFO_Pharmcy_patient();
     this.props.COMMENT();*/
   }  
- 
+  handleREST=()=>{
+    console.log("from handle rest");
+   $('#forPharmcySearch').trigger("reset");
+ }
+ handleAlertError=()=>{
+  console.log("ddddddddddddddddddddddddddddddddddddddddddd");
+  $("#aletypharmcy").show('slow').delay(3000).fadeOut();
+}
  render(){
    console.log("sssssssssssss" , this.state.userID);
    const {patientinfo, USERR}= this.props; 
@@ -127,16 +129,16 @@ class SearchPatientForPharmcy extends Component {
         <div className="row">
                 <div className="col-lg-7  offset-md-2">
                     <h3>Comment Patient</h3>
-                    <div className="center red-text">
-                        {patientinfo.MESSAGETHI ? <p>{patientinfo.MESSAGETHI}</p> : null }
-                        </div>
-                    <div className="center red-text">
-                              {USERR.NUMOFCOMMENTS===5 ?<h3> WILL Add Ads soon</h3> :null} 
-                       </div>
-                        
+                  {
+                    patientinfo.numComments>0 &&
+                 
+                        <div className="alert alert-info"  id="aletypharmcy" role="alert">
+                                             { patientinfo.MESSAGETHI +  patientinfo.numComments}
+                            </div> 
+                             }         
                     </div>
                     <div className="col-md-7 offset-md-2 ">
-                          <form onSubmit={this.handleSubmit}>
+                          <form id="forPharmcySearch" onSubmit={this.handleSubmit}>
                             <div className="form-group">
                                     <button type="submit" className="btn btn-primary">Search</button>
                             </div>
@@ -190,7 +192,7 @@ const mapStateToProps = (state) => {
     return {
        SEARCH_FOR_Pharmcy_GET_PATIENT:(info)=>dispatch(SEARCH_FOR_Pharmcy_GET_PATIENT(info)),
        GETIFO_Pharmcy_patient:()=>dispatch(GETIFO_Pharmcy_patient()),
-       COMMENT:()=>dispatch(COMMENT()),
+       COMMENT:(info)=>dispatch(COMMENT(info)),
        cOOMENTINCReaseONE:()=>dispatch(cOOMENTINCReaseONE())
     }
   } 

@@ -72,7 +72,7 @@ class  AddMedicalTest extends Component{
   }
   handleAlertError=()=>{
     console.log("ddddddddddddddddddddddddddddddddddddddddddd");
-    $("#aletyTesMedicla").show('slow').delay(1000).fadeOut();
+    $("#aletyTesMedicla").show('slow').delay(3000).fadeOut();
   }
  render(){
   const {MESSAGES}=this.props;
@@ -87,11 +87,12 @@ class  AddMedicalTest extends Component{
     <div className="col-lg-7  offset-md-2">
            <h3>Add  MedicalTest</h3>
         </div>
-        <div className="alert alert-info"  id="aletyTesMedicla" role="alert">
-           { MESSAGES.MESSAGE}
-          </div>
+       
      </div>
           <div className="col-md-7 offset-md-2 ">
+          <div className="alert alert-info"  id="aletyTesMedicla" role="alert">
+           { MESSAGES.MESSAGE}
+          </div>
               <form id="addFormMediclaTEST" onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <input type="text" autoComplete="off" className="form-control" required placeholder="USer-ID" onChange={this.handleChangePatientID}/>

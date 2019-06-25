@@ -80,7 +80,7 @@ class AddClinci extends Component {
   }
   handleAlertError=()=>{
     console.log("ddddddddddddddddddddddddddddddddddddddddddd");
-    $("#aletyclinc").show('slow').delay(1000).fadeOut();
+    $("#aletyclinc").show('slow').delay(3000).fadeOut();
   }
   render(){
     const {MESSAGES}=this.props;
@@ -91,11 +91,12 @@ class AddClinci extends Component {
       <div className="col-lg-7  offset-md-2">
              <h3>Add  clinic</h3>
      </div>
-     <div className="alert alert-info"  id="aletyclinc" role="alert">
-           { MESSAGES.MESSAGE}
-          </div>
+    
    
             <div className="col-md-7 offset-md-2 ">
+            <div className="alert alert-info"  id="aletyclinc" role="alert">
+           { MESSAGES.MESSAGE}
+          </div>
                 <form id="addFormClinic" onSubmit={this.handleSubmit}>
                 
                     <div className="form-group">

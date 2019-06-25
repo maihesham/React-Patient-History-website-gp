@@ -20,9 +20,8 @@ class App extends Component {
     
   }
   go=()=>{
-    console.log("from go");
     if(this.state.count===200){
-      setTimeout(window.location = '/login',100*60*60*60*60*60*60*60);
+     // setTimeout(window.location = '/login',100*60*60*60*60*60*60*60);
 
     }
   }

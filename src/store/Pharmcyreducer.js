@@ -2,7 +2,8 @@ const initState = {
   
    id:null,
    MEDICIEN:[]
-   ,MESSAGETHI:null
+   ,MESSAGETHI:null,
+   numComments:0
 } 
 const searchPAtientforPharmcyReducer = (state = initState, action) => {
    switch(action.type){
@@ -20,11 +21,13 @@ const searchPAtientforPharmcyReducer = (state = initState, action) => {
                ,MESSAGETHI:null
            }
        case "COMMENT":
+           console.log(action.info)
            return{
             ...state,
             id:null
             , MEDICIEN:null,
-            MESSAGETHI:"THink for Comment"
+            MESSAGETHI:"THink for Comment",
+            numComments:action.info
            }     
     
      default:

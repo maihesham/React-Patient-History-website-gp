@@ -12,9 +12,11 @@ export const GETIFO_Pharmcy_patient=()=>{
     }
    
 };
-export const COMMENT=()=>{
+export const COMMENT=(info)=>{
+    console.log("ffffffffffffffff",info);
     return {
-        type:"COMMENT"
+        type:"COMMENT",
+        info:info
         
     }
    
